@@ -1,2 +1,2 @@
 # Easy-Stay
-Go to Travelling site
+Go to Travelling website
