@@ -9,6 +9,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
+    
 }
 
 .container {
@@ -93,16 +94,22 @@ body {
     color: #222222;
 }
 
-.f-info-links, .f-info-socials, .f-info-brand  {
+.f-info-links, .f-info-brand  {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.f-info-socials i {
-    margin-right: 1rem;
+.t-icon, .i-icon, .l-icon{
+    margin-top: 1rem;
+    margin-right: 2rem;
     font-size: 1.2rem;
+    transition: 0.5s;
+}
+
+.t-icon:hover, .i-icon:hover, .l-icon:hover {
+    font-size: 1.3rem;
 }
 
 .f-info-links {
@@ -130,7 +137,7 @@ body {
     border-radius: 15px; 
     padding: 20px; 
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5); 
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
 }
 
 .listing-card {

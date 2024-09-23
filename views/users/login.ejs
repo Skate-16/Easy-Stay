@@ -1,0 +1,25 @@
+<% layout("/layouts/boilerplate") -%>
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 150px);">
+<div class="row w-100">
+    <div class="col-6 offset-3">
+        <div class="new-stay-form">
+            <h3 style="text-align: center; font-size: 1.4rem;"><b>Log In</b></h3><br>
+            <form action="/login" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label"> Username: </label>
+                    <input name="username" class="form-control" id="username" placeholder="Enter your username" type="text" required>
+                    <div class="invalid-feedback">Please enter your username</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label"> Password: </label>
+                    <input name="password" class="form-control" id="password" placeholder="Enter your password" type="password" required>
+                    <div class="invalid-feedback">Please enter your password</div>
+                </div>
+                <br>
+                <button class="btn btn-success">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
