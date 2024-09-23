@@ -7,9 +7,13 @@ const ejsMate = require("ejs-mate")
 const ExpressError = require("./utils/ExpressError.js")
 const session = require("express-session")
 const flash = require("connect-flash")
+const passport = require("passport")
+const LocalStrategy = require("passport-local")
+const User = require("./models/user.js")
 
 const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
+const user = require("./routes/userRoute.js")
 
 const MONGO_URL = "mongodb://localhost:27017/EasyStay"
 
@@ -50,9 +54,16 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions))
 app.use(flash())
 
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use((req, res, next) => {
     res.locals.success = req.flash("success")
     res.locals.error = req.flash("error")
+    res.locals.currUser = req.user
     next()
 })
 
@@ -61,6 +72,9 @@ app.use("/listings", listings)
 
 //Reviews Route
 app.use("/listings/:id/reviews", reviews)
+
+//User Route
+app.use("/", user)
 
 //Wrong Route Error
 app.all("*", (req, res, next) => {
