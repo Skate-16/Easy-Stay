@@ -12,6 +12,7 @@ const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
 const ExpressError = require("./utils/ExpressError.js")
 const session = require("express-session")
+const MongoStore = require("connect-mongo")
 const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
@@ -22,8 +23,7 @@ const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
 const user = require("./routes/userRoute.js")
 
-const MONGO_URL = "mongodb://localhost:27017/EasyStay"
-// const dbURL = process.env.ATLASDB_URL
+const dbURL = process.env.ATLASDB_URL
 
 main()
     .then(() => {
@@ -34,7 +34,7 @@ main()
     })
 
 async function main() {
-    await mongoose.connect(MONGO_URL)
+    await mongoose.connect(dbURL)
 }
 
 app.set("view engine", "ejs")
@@ -44,8 +44,21 @@ app.use(methodOverride("_method"))
 app.engine("ejs", ejsMate)
 app.use(express.static(path.join(__dirname, "/public")))
 
+const store = MongoStore.create({
+    mongoUrl: dbURL,
+    crypto: {
+        secret: process.env.SECRET
+    },
+    touchAfter: 24 * 3600
+})
+
+store.on("error", () => {
+    console.log("Error in Mongo Session Store", err)
+})
+
 const sessionOptions = {
-    secret: "thesyncingknight",
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -70,6 +83,11 @@ app.use((req, res, next) => {
     res.locals.currUser = req.user
     next()
 })
+
+//Home Page 
+app.get("/", wrapAsync(async (req,res) => {
+    res.render("home/home.ejs")
+}))
 
 //Listings Route
 app.use("/listings", listings)
