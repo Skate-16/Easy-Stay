@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV != "production") {
+    require("dotenv").config()
+}
+
+console.log(process.env.SECRET)
+
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
@@ -10,12 +16,14 @@ const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const User = require("./models/user.js")
+const wrapAsync = require("./utils/wrapAsync.js")
 
 const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
 const user = require("./routes/userRoute.js")
 
 const MONGO_URL = "mongodb://localhost:27017/EasyStay"
+// const dbURL = process.env.ATLASDB_URL
 
 main()
     .then(() => {
@@ -47,10 +55,6 @@ const sessionOptions = {
     }
 }
 
-app.get("/", (req, res) => {
-    res.send("HOME PAGE")
-})
-
 app.use(session(sessionOptions))
 app.use(flash())
 
@@ -69,6 +73,15 @@ app.use((req, res, next) => {
 
 //Listings Route
 app.use("/listings", listings)
+
+//Privacy and Terms Route
+app.get("/privacy", wrapAsync(async (req,res) => {
+    res.render("footerControls/privacy.ejs")
+}))
+
+app.get("/terms", wrapAsync(async (req,res) => {
+    res.render("footerControls/terms.ejs")
+}))
 
 //Reviews Route
 app.use("/listings/:id/reviews", reviews)
