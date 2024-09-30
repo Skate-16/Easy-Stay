@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
       folder: 'Easy-Stay_DEV',
-      allowedFormats: ["png","jpg","jpeg"]
+      allowedFormats: ["png","jpg","jpeg","mp4","mp3"]
     },
 })
 
