@@ -33,38 +33,36 @@
         font-size: 32px !important;
     }
 
-    .home-videos {
+    .home-img {
         display: flex;
         flex-wrap: wrap; 
         justify-content: center; 
         gap: 20px; 
     }
 
-    .video-thumbnail, video {
+    img {
         display: block;
         height: 175px;
         width: 300px;
         border: 3px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
-        margin: 1.5rem;
-        object-fit: cover; /* Ensures thumbnails and videos maintain their aspect ratio */
-        cursor: pointer; /* Makes thumbnails clickable */
+        margin: 1.5rem; 
     }
-
+    
     @media (max-width: 768px) {
         .home {
             padding: 1rem; 
         }
 
-        .home-videos {
+        .home-img {
             flex-direction: column; 
             gap: 15px;
         }
 
-        .video-thumbnail, video {
+        img {
             width: 100%; 
             height: auto; 
-            max-width: 350px;
+            max-width: 350px; 
             margin: 1rem auto; 
         }
     }
@@ -75,8 +73,10 @@
         font-style: normal;
         font-size: 50px;
         color: rgba(241, 227, 227);
-    }
+    } 
+  
 </style>
+
 
 <div class="row">
     <div class="col-8 offset-2">
@@ -89,10 +89,11 @@
                 </a>
                 our amazing locations!!
             </h4>
-            <div class="home-videos">
-                <!-- Thumbnails that load first -->
-                <img class="video-thumbnail" src="../images/img-2.avif" data-video="../images/mountains.mp4" alt="Mountains">
-                <img class="video-thumbnail" src="../images/img-4.avif" data-video="../images/farms.mp4" alt="Farms">
+            <div class="home-img">
+                <img src="../images/img-2.avif" alt="home-img-1">
+                <img src="../images/img-4.avif" alt="home-img-2">
+                <img src="../images/img-5.avif" alt="home-img-3">
+                <img src="../images/img-7.avif" alt="home-img-4">
             </div>
             <p class="ms-auto h4" 
                 style="color: rgba(241, 227, 227); font-size: 25px !important;text-align: end;margin-right: 1.5rem;">
@@ -100,21 +101,6 @@
             </p>
             <br>
         </div>
+       
     </div>
 </div>
-
-<script>
-    document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
-        thumbnail.addEventListener('click', function() {
-            const videoSrc = this.getAttribute('data-video');
-            const videoElement = document.createElement('video');
-            videoElement.setAttribute('src', videoSrc);
-            videoElement.setAttribute('controls', 'true');
-            videoElement.setAttribute('autoplay', 'true');
-            videoElement.setAttribute('loop', 'true');
-            videoElement.setAttribute('muted', 'true');
-            videoElement.style.cssText = this.style.cssText; // Apply the same styling
-            this.replaceWith(videoElement);
-        });
-    });
-</script>
