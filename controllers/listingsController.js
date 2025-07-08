@@ -37,7 +37,8 @@ module.exports.showListings = async (req, res) => {
         req.flash("error", "Requested Stay does not exist!")
         res.redirect("/listings")
     }
-    res.render("listings/show.ejs", {listing})
+    res.render("listings/show.ejs", {listing,
+    token: process.env.MAP_TOKEN})
 }
 
 module.exports.createListing = async (req, res, next) => {
