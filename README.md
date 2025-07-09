@@ -65,7 +65,6 @@ DISCLAIMER: Payments are in "test mode only". No real transactions are made.
 | RuPay     | `6080 0000 0000 0000`  | 123 | 12/28  | Recommended (India) |
 | Visa      | `5123 4567 8901 2346`  | 123 | 12/28  | HDFC Visa           |
 | ICICI Visa| `4854 1965 2623 4106`  | 123 | 12/28  | Success             |
-| MasterCard| `5105 1051 0510 5100`  | 123 | 12/28  | Success             |
 | Failed Txn| `4000 0027 6000 0007`  | 123 | 12/28  | Simulates failure   |
 
 ---
