@@ -23,8 +23,8 @@ const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
 const user = require("./routes/userRoute.js")
 
-const dbURL = process.env.ATLASDB_URL
-// const dbURL= "mongodb://localhost:27017/EasyStay"
+// const dbURL = process.env.ATLASDB_URL
+const dbURL= "mongodb://localhost:27017/EasyStay"
 
 main()
     .then(() => {
