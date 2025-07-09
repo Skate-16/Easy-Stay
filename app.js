@@ -102,17 +102,17 @@ app.get("/terms", wrapAsync(async (req,res) => {
     res.render("footerControls/terms.ejs")
 }))
 
-app.get("/refund", (req, res) => {
-  res.render("footerControls/refund.ejs");
-});
+app.get("/refund", wrapAsync(async (req,res) => {
+    res.render("footerControls/refund.ejs");
+}))
 
-app.get("/shipping", (req, res) => {
-  res.render("footerControls/shipping.ejs");
-});
+app.get("/shipping", wrapAsync(async (req,res) => {
+    res.render("footerControls/shipping.ejs");
+}))
 
-app.get("/contact", (req, res) => {
-  res.render("footerControls/contact.ejs");
-});
+app.get("/contact", wrapAsync(async (req,res) => {
+    res.render("footerControls/contact.ejs");
+}))
 
 
 //Reviews Route
