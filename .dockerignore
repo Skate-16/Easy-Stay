@@ -1,7 +1,12 @@
+
 node_modules/
 .env
-uploads/
-logs/
-.cache/
 .git/
+.vscode/
+.cache/
 *.log
+*.zip
+*.tar
+*.tgz
+*.sqlite
+*.bak
