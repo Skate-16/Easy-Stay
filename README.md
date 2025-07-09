@@ -1,7 +1,7 @@
 # Easy-Stay
 Go to Travelling website
 
-[Live Demo](https://easy-stay-j5ay.onrender.com) | [GitHub Repository](https://github.com/Skate-16)
+[Live Demo](http://easy-stay-production.up.railway.app) | [GitHub Repository](https://github.com/Skate-16)
 
 
 
