@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (checkin && checkout) {
       const days = calculateDays(checkin, checkout);
       const baseAmount = pricePerDay * days;
-      const finalAmount = Math.round(baseAmount * 1.18); // GST
+      const finalAmount = Math.round(baseAmount * 1.18); 
 
       amountText.innerText = `Total Amount (GST included): ₹${finalAmount.toLocaleString("en-IN")}`;
       rzpBtn.setAttribute("data-amount", finalAmount);
