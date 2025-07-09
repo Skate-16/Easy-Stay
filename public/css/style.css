@@ -158,14 +158,14 @@ body {
 
 .f-info-links a {
     text-decoration: none;
-    color: #222222;
+    color: #0067ee;
     transition: transform 0.3s ease !important;
 }
 
 .f-info-links a:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
     font-weight: 600;
-    color: #0000EE;
+    color: #0067ee;
 }
 
 .f-info-links,
