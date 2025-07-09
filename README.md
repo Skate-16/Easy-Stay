@@ -46,19 +46,43 @@ Features
    - Cloudinary Setup: Middleware uploads images from forms, returns URLs and public IDs.
    - Image Management: On stay deletion, associated images are removed from Cloudinary.
 
-8. Project Structure
+8. Razorpay Payment Integration (Test Mode Only)
+   - Payment Enabled Booking: Users must select check-in and check-out dates. Pricing is based on daily rate × number of days + 18% GST.
+   - Razorpay Checkout: Secure and dynamic payment gateway for booking listings.
+   - Booking Restrictions: Owners cannot book their own listings.
 
+Working Razorpay Flow:
+   - Automatically calculates total booking cost + GST.
+   - Generates dynamic Razorpay order and charges the user.
+   - Saves payment ID and booking info to MongoDB.
 
-├── public           # Static assets: CSS, client-side JS, images
-├── views            # EJS templates (layouts, partials, pages)
-│   ├── partials     # Navbar, footer, flash messages
-│   └── stays        # Index, show, new, edit views
-├── routes           # Express routers (stays.js, reviews.js, users.js)
-├── controllers      # Handler functions separated by resource
-├── models           # Mongoose schemas: User, Stay, Review
-├── middleware       # auth checks, error handling, validation
-├── utils            # ExpressError class, Joi schemas for validation
-├── app.js           # Express app setup: middleware, routes, error handler
+Test Cards for Simulation:
+
+DISCLAIMER: Payments are in "test mode only". No real transactions are made.
+
+| Card Type | Card Number           | CVV | Expiry | Description           |
+|-----------|------------------------|-----|--------|-----------------------|
+| RuPay     | `6080 0000 0000 0000`  | 123 | 12/28  | Recommended (India) |
+| Visa      | `5123 4567 8901 2346`  | 123 | 12/28  | HDFC Visa           |
+| ICICI Visa| `4854 1965 2623 4106`  | 123 | 12/28  | Success             |
+| MasterCard| `5105 1051 0510 5100`  | 123 | 12/28  | Success             |
+| Failed Txn| `4000 0027 6000 0007`  | 123 | 12/28  | Simulates failure   |
+
+---
+
+Project Structure
+
+├── public # Static assets: CSS, client-side JS, images
+├── views # EJS templates (layouts, partials, pages)
+│ ├── partials # Navbar, footer, flash messages
+│ └── listings # Index, show, new, edit views
+├── routes # Express routers (listings.js, reviews.js, users.js, payment.js)
+├── controllers # Logic for listings, reviews, payment, booking
+├── models # Mongoose schemas: User, Listing, Review
+├── middleware # Auth, error handling, validation
+├── utils # ExpressError class, wrapAsync, JOI validators
+├── app.js # Express app: middleware, sessions, routes
+├── .env # Not committed: includes secret keys for DB, Mapbox, Razorpay
 
 
 License
