@@ -41,7 +41,20 @@ const listingSchema = new Schema({
             type: [Number],
             required: true
         }
+    },
+    bookings: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      razorpay_payment_id: String,
+      bookedAt: {
+        type: Date,
+        default: Date.now
+      }
     }
+  ]
 })
 
 listingSchema.post("findOneAndDelete", async(listing) => {

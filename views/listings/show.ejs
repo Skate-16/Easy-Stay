@@ -16,7 +16,49 @@
                 <%= listing.location %><br>
                 <%= listing.country %>
             </p>
+            <% if (currUser && !currUser._id.equals(listing.owner._id)) { %>
+            <% const today = new Date().toISOString().split("T")[0]; %>
+            <div class="mb-3">
+                <label for="checkin">Check-in:</label>
+                <input
+                type="date"
+                id="checkin"
+                class="form-control"
+                required
+                min="<%= today %>"
+                >
+
+                <label for="checkout" class="mt-2">Check-out:</label>
+                <input
+                type="date"
+                id="checkout"
+                class="form-control"
+                required
+                min="<%= today %>"
+                >
+            </div>
+
+            <p id="final-amount-text" class="fw-bold"></p>
+
+            <button
+                class="btn btn-primary"
+                id="rzp-button"
+                data-price="<%= listing.price %>"
+                data-listing-id="<%= listing._id %>"
+                data-key="<%= process.env.RAZORPAY_KEY_ID %>"
+            >
+                Book Now
+            </button>
+
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script src="/js/razorpay.js"></script>
+
+            <% } else if (!currUser) { %>
+            <p><i>Please <a style="text-decoration: none;" href="/login">login</a> to book this stay.</i></p>
+            <% } %>
+        
         </div>
+       
     </div>
     <br>
     <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
@@ -96,6 +138,8 @@
 </div>
 
 <script src="/js/map.js"></script>
+
+
 
 
 
