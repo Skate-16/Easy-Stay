@@ -22,9 +22,12 @@ const wrapAsync = require("./utils/wrapAsync.js")
 const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
 const user = require("./routes/userRoute.js")
+const payment = require("./routes/paymentRoute");
+const booking = require("./routes/bookingRoute");
 
-const dbURL = process.env.ATLASDB_URL
-// const dbURL= "mongodb://localhost:27017/EasyStay"
+
+// const dbURL = process.env.ATLASDB_URL
+const dbURL= "mongodb://localhost:27017/EasyStay"
 
 main()
     .then(() => {
@@ -44,6 +47,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.engine("ejs", ejsMate)
 app.use(express.static(path.join(__dirname, "/public")))
+app.use(express.json())
 
 const store = MongoStore.create({
     mongoUrl: dbURL,
@@ -120,6 +124,10 @@ app.use("/listings/:id/reviews", reviews)
 
 //User Route
 app.use("/", user)
+
+//Booking and Payment Routes
+app.use("/payment", payment);
+app.use("/listings", booking);
 
 //Wrong Route Error
 app.all("*", (req, res, next) => {
