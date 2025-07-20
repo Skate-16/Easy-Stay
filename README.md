@@ -1,8 +1,7 @@
 # Easy-Stay
 Go to Travelling website
 
-[Live Demo](http://easy-stay-production.up.railway.app) | [GitHub Repository](https://github.com/Skate-16)
-
+[Live Demo](https://easy-stay-production.up.railway.app) | [GitHub Repository](https://github.com/Skate-16/Easy-Stay)
 
 
 Project Overview
@@ -10,10 +9,10 @@ Project Overview
 Easy Stay is a robust real estate booking platform built using Node.js, Express, MongoDB, and EJS. It enables users to discover, list, and review accommodations with secure authentication and intuitive error handling.
 
 
-
 Features
 
 1. User Authentication & Authorization
+   - Google OAuth Login: Users can sign up or log in using their Google account for quick and secure authentication.
    - Signup & Login: Users can register with email and password; passwords are hashed for security.
    - Session Management: Persistent sessions using express-session and secure cookies.
    - Access Control: Middleware ensures only authenticated users can add stays/reviews; owners can edit or delete their listings.
@@ -71,17 +70,19 @@ DISCLAIMER: Payments are in "test mode only". No real transactions are made.
 
 Project Structure
 
-├── public # Static assets: CSS, client-side JS, images
-├── views # EJS templates (layouts, partials, pages)
-│ ├── partials # Navbar, footer, flash messages
-│ └── listings # Index, show, new, edit views
-├── routes # Express routers (listings.js, reviews.js, users.js, payment.js)
-├── controllers # Logic for listings, reviews, payment, booking
-├── models # Mongoose schemas: User, Listing, Review
-├── middleware # Auth, error handling, validation
-├── utils # ExpressError class, wrapAsync, JOI validators
-├── app.js # Express app: middleware, sessions, routes
-├── .env # Not committed: includes secret keys for DB, Mapbox, Razorpay
+├── public            # Static assets: CSS, client-side JS, images
+├── views             # EJS templates (layouts, partials, pages)
+│   ├── partials      # Navbar, footer, flash messages
+│   └── listings      # Index, show, new, edit views
+├── routes            # Express routers (listings.js, reviews.js, users.js, payment.js)
+├── controllers       # Logic for users, listings, reviews, payment, booking, filters
+├── models            # Mongoose schemas: User, Listing, Review
+├── middleware        # Auth, error handling, validation
+├── utils             # ExpressError class, wrapAsync, JOI validators
+├── oauth
+│   └── passport.js   # Google OAuth strategy configuration
+├── app.js            # Express app: middleware, sessions, routes
+├── .env              # Not committed: includes secret keys for MongoDB Atlas, Cloudinary, Mapbox, Razorpay, Google OAuth
 
 
 License
