@@ -6,6 +6,14 @@ console.log(process.env.SECRET)
 
 const express = require("express")
 const app = express()
+if (process.env.NODE_ENV === "production") {
+    app.use((req, res, next) => {
+        if (req.headers["x-forwarded-proto"] !== "https") {
+            return res.redirect("https://" + req.headers.host + req.url);
+        }
+        next();
+    });
+}
 const mongoose = require("mongoose")
 const path = require("path")
 const methodOverride = require("method-override")
@@ -27,8 +35,8 @@ const payment = require("./routes/paymentRoute");
 const booking = require("./routes/bookingRoute");
 
 
-const dbURL = process.env.ATLASDB_URL
-// const dbURL= "mongodb://localhost:27017/EasyStay"
+// const dbURL = process.env.ATLASDB_URL
+const dbURL= "mongodb://localhost:27017/EasyStay"
 
 main()
     .then(() => {
