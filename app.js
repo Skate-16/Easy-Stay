@@ -6,6 +6,7 @@ console.log(process.env.SECRET)
 
 const express = require("express")
 const app = express()
+app.set('trust proxy', 1);
 if (process.env.NODE_ENV === "production") {
     app.use((req, res, next) => {
         if (req.headers["x-forwarded-proto"] !== "https") {
