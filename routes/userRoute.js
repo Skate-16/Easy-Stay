@@ -20,4 +20,11 @@ router.route("/login")
 
 router.get("/logout", userController.logoutUser)
 
+router.route("/auth/google")
+    .get(userController.googleAuth);
+
+router.route("/auth/google/callback")
+    .get(userController.googleCallback);
+
+
 module.exports = router

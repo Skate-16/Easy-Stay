@@ -17,6 +17,7 @@ const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const User = require("./models/user.js")
+require("./oauth/passport")
 const wrapAsync = require("./utils/wrapAsync.js")
 
 const listings = require("./routes/listingRoute.js")

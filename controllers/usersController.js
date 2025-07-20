@@ -1,4 +1,5 @@
 const User = require("../models/user.js")
+const passport = require("passport");
 
 module.exports.renderSignup = (req, res) => {
     res.render("users/signup.ejs")
@@ -43,3 +44,18 @@ module.exports.logoutUser = (req, res, next) => {
         res.redirect("/listings")
     })
 }
+
+module.exports.googleAuth = passport.authenticate("google", {
+    scope: ["profile", "email"]
+})
+
+module.exports.googleCallback = [
+    passport.authenticate("google", {
+        failureRedirect: "/login",
+        failureFlash: true
+    }),
+    (req, res) => {
+        req.flash("success",`You're logged in! Welcome back ${req.user.username}!`)
+        res.redirect("/listings");
+    }
+]
