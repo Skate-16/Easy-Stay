@@ -35,8 +35,8 @@ const payment = require("./routes/paymentRoute");
 const booking = require("./routes/bookingRoute");
 
 
-// const dbURL = process.env.ATLASDB_URL
-const dbURL= "mongodb://localhost:27017/EasyStay"
+const dbURL = process.env.ATLASDB_URL
+// const dbURL= "mongodb://localhost:27017/EasyStay"
 
 main()
     .then(() => {
