@@ -2,8 +2,6 @@ if(process.env.NODE_ENV != "production") {
     require("dotenv").config()
 }
 
-console.log(process.env.SECRET)
-
 const express = require("express")
 const app = express()
 app.set('trust proxy', 1);
@@ -79,7 +77,9 @@ const sessionOptions = {
     cookie: {
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // only send cookie over HTTPS in prod
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax'
     }
 }
 
