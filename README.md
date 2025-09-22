@@ -1,7 +1,7 @@
 # Easy-Stay
 Go to Travelling website
 
-[Live Demo](https://easy-stay-production.up.railway.app) | [GitHub Repository](https://github.com/Skate-16/Easy-Stay)
+[Live Demo](https://easy-stay-uu8d.onrender.com) | [GitHub Repository](https://github.com/Skate-16/Easy-Stay)
 
 
 Project Overview
@@ -54,6 +54,10 @@ Working Razorpay Flow:
    - Automatically calculates total booking cost + GST.
    - Generates dynamic Razorpay order and charges the user.
    - Saves payment ID and booking info to MongoDB.
+
+Test Mobile numbers for simulation (India - 91):
++91-9900000001
++91-9900000002
 
 Test Cards for Simulation:
 
