@@ -52,4 +52,4 @@ jobs:
           app-name: 'sarang-easy-stay'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_52E4A9656CAE45EF95AA3F2BD1898A23 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E5F0EFB696744B929F528F19DE7B8E4B }}
