@@ -148,8 +148,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("listings/error.ejs", { err })
 })
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log("Listening on port", process.env.PORT || 8080);
+app.listen(3000, () => {
+    console.log("Listening on port", 3000);
 });
 
 
