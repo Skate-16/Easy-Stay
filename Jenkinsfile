@@ -5,21 +5,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t easystay-app .'
+                bat 'docker build -t easystay-app .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh '''
-                docker stop easystay-container || true
-                docker rm easystay-container || true
+                bat '''
+                docker stop easystay-container
+                docker rm easystay-container
                 docker run -d -p 3000:3000 --name easystay-container easystay-app
                 '''
             }
