@@ -33,8 +33,7 @@ pipeline {
                 ]) {
 
                     bat '''
-                    docker stop easystay-container || exit 0
-                    docker rm easystay-container || exit 0
+                    docker rm -f easystay-container 2>nul
 
                     docker run -d -p 3000:3000 ^
                     -e CLOUD_NAME=%CLOUD_NAME% ^
