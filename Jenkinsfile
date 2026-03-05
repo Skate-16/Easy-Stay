@@ -18,9 +18,9 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 bat '''
-                docker stop easystay-container
-                docker rm easystay-container
-                docker run -d -p 3000:3000 --name easystay-container easystay-app
+                docker stop easystay-container || exit 0
+                docker rm easystay-container || exit 0
+                docker run -d -p 3000:3000 --env-file .env --name easystay-container easystay-app
                 '''
             }
         }
