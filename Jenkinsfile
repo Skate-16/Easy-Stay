@@ -9,6 +9,14 @@ pipeline {
             }
         }
 
+        stage('SonarQube SAST Scan') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat 'sonar-scanner'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t easystay-app .'
