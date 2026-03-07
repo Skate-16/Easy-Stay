@@ -11,8 +11,11 @@ pipeline {
 
         stage('SonarQube SAST Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat '"%SONAR_SCANNER_HOME%\\bin\\sonar-scanner.bat"'
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('SonarQube') {
+                        bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+                    }
                 }
             }
         }
@@ -59,5 +62,6 @@ pipeline {
                 }
             }
         }
+
     }
 }
