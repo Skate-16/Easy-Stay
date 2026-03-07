@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarRunner 'sonar-scanner'
-    }
-
     stages {
 
         stage('Install Dependencies') {
@@ -16,7 +12,7 @@ pipeline {
         stage('SonarQube SAST Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat 'sonar-scanner'
+                    bat '"%SONAR_SCANNER_HOME%\\bin\\sonar-scanner.bat"'
                 }
             }
         }
@@ -63,6 +59,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
