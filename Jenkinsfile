@@ -97,10 +97,18 @@ pipeline {
         stage('OWASP ZAP DAST Scan (Azure App)') {
             steps {
                 bat '''
-                docker run --rm -u root -t -v %cd%:/zap/wrk ^
+                docker rm -f zapscan 2>nul
+
+                docker run -d --name zapscan ^
                 ghcr.io/zaproxy/zaproxy:stable zap-baseline.py ^
                 -t %AZURE_APP_URL% ^
                 -r zap-report.html
+
+                docker wait zapscan
+
+                docker cp zapscan:/zap/zap-report.html zap-report.html
+
+                docker rm zapscan
                 '''
             }
         }
