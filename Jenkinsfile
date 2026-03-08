@@ -11,6 +11,17 @@ pipeline {
             steps {
                 bat '''
                 docker start sonarqube 2>nul || docker run -d -p 9000:9000 --name sonarqube sonarqube:community
+
+                echo Waiting for SonarQube to start...
+
+                :loop
+                powershell -Command "(Invoke-WebRequest http://localhost:9000/api/system/status -UseBasicParsing).Content" | find "UP"
+                if errorlevel 1 (
+                    timeout /t 5 >nul
+                    goto loop
+                )
+
+                echo SonarQube is ready
                 '''
             }
         }
@@ -41,8 +52,7 @@ pipeline {
         stage('Trivy Image Scan') {
             steps {
                 bat '''
-                docker run --rm -v /var/run/docker.sock:/var/run/docker.sock ^
-                -v %cd%:/root/.cache/ aquasec/trivy image easystay-app
+                docker run --rm aquasec/trivy image easystay-app
                 '''
             }
         }
@@ -89,7 +99,7 @@ pipeline {
                 bat '''
                 docker run --rm -t -v %cd%:/zap/wrk ^
                 ghcr.io/zaproxy/zaproxy:stable zap-baseline.py ^
-                -t https://easy-stay-dudzcsevg5bweahh.southeastasia-01.azurewebsites.net/ ^
+                -t %AZURE_APP_URL% ^
                 -r zap-report.html
                 '''
             }
