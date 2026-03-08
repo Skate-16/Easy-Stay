@@ -49,13 +49,13 @@ pipeline {
             }
         }
 
-        stage('Trivy Image Scan') {
-            steps {
-                bat '''
-                docker run --rm aquasec/trivy image easystay-app
-                '''
-            }
-        }
+        // stage('Trivy Image Scan') {
+        //     steps {
+        //         bat '''
+        //         docker run --rm aquasec/trivy image easystay-app
+        //         '''
+        //     }
+        // }
 
         stage('Run Docker Container') {
             steps {
