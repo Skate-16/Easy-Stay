@@ -1,7 +1,19 @@
 pipeline {
     agent any
 
+    environment {
+        AZURE_APP_URL = "https://easy-stay-dudzcsevg5bweahh.southeastasia-01.azurewebsites.net"
+    }
+
     stages {
+
+        stage('Start SonarQube Community Container') {
+            steps {
+                bat '''
+                docker start sonarqube 2>nul || docker run -d -p 9000:9000 --name sonarqube sonarqube:community
+                '''
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
@@ -23,6 +35,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t easystay-app .'
+            }
+        }
+
+        stage('Trivy Image Scan') {
+            steps {
+                bat '''
+                docker run --rm -v /var/run/docker.sock:/var/run/docker.sock ^
+                -v %cd%:/root/.cache/ aquasec/trivy image easystay-app
+                '''
             }
         }
 
@@ -60,6 +81,17 @@ pipeline {
                     --name easystay-container easystay-app
                     '''
                 }
+            }
+        }
+
+        stage('OWASP ZAP DAST Scan (Azure App)') {
+            steps {
+                bat '''
+                docker run --rm -t -v %cd%:/zap/wrk ^
+                ghcr.io/zaproxy/zaproxy:stable zap-baseline.py ^
+                -t https://easy-stay-dudzcsevg5bweahh.southeastasia-01.azurewebsites.net/ ^
+                -r zap-report.html
+                '''
             }
         }
 
