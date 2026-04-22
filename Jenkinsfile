@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        AZURE_APP_URL = "https://easy-stay-dudzcsevg5bweahh.southeastasia-01.azurewebsites.net"
-    }
+    // environment {
+    //     AZURE_APP_URL = "https://easy-stay-dudzcsevg5bweahh.southeastasia-01.azurewebsites.net"
+    // }
 
     stages {
 

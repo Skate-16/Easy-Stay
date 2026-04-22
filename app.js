@@ -2,6 +2,8 @@ if(process.env.NODE_ENV != "production") {
     require("dotenv").config()
 }
 
+const client = require('prom-client')
+client.collectDefaultMetrics()
 const express = require("express")
 const app = express()
 app.set('trust proxy', 1);
@@ -30,9 +32,9 @@ const wrapAsync = require("./utils/wrapAsync.js")
 const listings = require("./routes/listingRoute.js")
 const reviews = require("./routes/reviewRoute.js")
 const user = require("./routes/userRoute.js")
-const payment = require("./routes/paymentRoute");
-const booking = require("./routes/bookingRoute");
-
+const payment = require("./routes/paymentRoute")
+const booking = require("./routes/bookingRoute")
+const metrics = require("./routes/metrics")   
 
 const dbURL = process.env.ATLASDB_URL
 // const dbURL= "mongodb://localhost:27017/EasyStay"
@@ -56,6 +58,7 @@ app.use(methodOverride("_method"))
 app.engine("ejs", ejsMate)
 app.use(express.static(path.join(__dirname, "/public")))
 app.use(express.json())
+app.use('/metrics', metrics)
 
 const store = MongoStore.create({
     mongoUrl: dbURL,
